@@ -22,10 +22,22 @@ for _, number := range numbers{
 
 ## Slices
 
-Slices in go do NOT encode the size of the collection, they can be of any size.
+Slices in go do NOT encode the size of the collection, they can be of any size.  However slices do have a capacity.  A slice of size two can't have an element inserted into the 10th position.  However, the append function can take a slice and a new value and combine them into a new slice.
+
+## Common Practices
+
+If a slice is create from an array or another slice, the slice references the original object in memory.  This means that is a function returns a slice of an array, it's better off copying the return value to a new slice so the reference to the original array is released and can be garbage collected.  Example [here](https://go.dev/play/p/Poth8JS28sc).
 
 ## Go Tips
 
 Use `range` to traverse arrays and slices.
 
 Theres a go package called `reflect` which has a `DeepEqual` that is better suited to test equality amongst slices but it is not type safe.  That is to say, it will compile even if it's comparing a string and a slice but it wont run.
+
+A [variadic function](https://gobyexample.com/variadic-functions) is one which will take a variable number of arguments.  The `...` in the function defintion is what allows for this.
+
+```go
+func SumAll(numbersToSum ...[]int) []int {
+	return nil
+}
+```
